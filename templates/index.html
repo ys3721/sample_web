@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SampleWeb</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<pre>送审服打包：<button type="button" id="audit" class="btn btn-default">点我</button>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">运行结果</h3>
+        <pre>
+        {{printf "%s" .Body}}
+        </pre>
+    </div>
+</body>
+
+<script>
+    $("#xls_check").click(function(){
+        window.location.href="./golang";
+    });
+</script>
+</html>
