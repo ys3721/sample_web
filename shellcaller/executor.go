@@ -12,6 +12,7 @@ var DoActionFunc = DoAction
 type ActionInfo struct {
 	Action string `uri:"action" binding:"required"`
 	Param  string `uri:"param" default:""`
+	Args   string `uri:"args" default:""`
 }
 
 func DoAction(c *gin.Context) {
@@ -24,15 +25,16 @@ func DoAction(c *gin.Context) {
 	switch actionInfo.Action {
 	case "execute":
 		shellName := actionInfo.Param
-		exeResp = string(executeShell(shellName))
+		args := actionInfo.Args
+		exeResp = string(executeShell(shellName, args))
 	}
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"Body": exeResp,
 	})
 }
 
-func executeShell(name string) []byte {
-	cmd := exec.Command("sh", name)
+func executeShell(name string, args string) []byte {
+	cmd := exec.Command("sh", name, args)
 	cmd.Dir = "./scripts"
 	respBytes, err := cmd.CombinedOutput()
 	if err != nil {
